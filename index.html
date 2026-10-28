@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content Creation 4 Beginners</title>
+<meta name="description" content="A free beginner's guide to short-form video: voice, aspect ratio, captions, music, sound effects, titles and warming up accounts.">
+<meta name="theme-color" content="#216bff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+  :root{
+    --bg:#090a0f; --surface:#11131b; --raised:#171a24; --line:#232736;
+    --text:#eef0f7; --muted:#8e94a9; --accent:#216bff; --accent-hi:#5b93ff;
+    --c-caps:#f2b53a; --c-broll:#6cb4f5; --c-voice:#ff836a; --c-music:#a88af7; --c-sfx:#36d0bd;
+    --radius:20px; --font:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+  body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.7 var(--font);-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--accent-hi);outline-offset:3px;border-radius:8px}
+  .wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(9,10,15,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+  .brand{font-weight:800;text-decoration:none;letter-spacing:-.02em;display:flex;align-items:center;gap:10px;white-space:nowrap}
+  .brand i{width:26px;height:26px;border-radius:8px;background:var(--accent);display:grid;place-items:center;font-style:normal;font-size:14px}
+  .links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  .links a{padding:8px 14px;border-radius:999px;color:var(--muted);text-decoration:none;font-size:15px;font-weight:600;white-space:nowrap;transition:color .15s,background .15s}
+  .links a:hover{color:var(--text);background:var(--raised)}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font:700 16px var(--font);text-decoration:none;border:1px solid var(--line);background:var(--raised);color:var(--text);cursor:pointer;transition:transform .15s,background .15s,border-color .15s}
+  .btn:hover{border-color:#3a4058}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{background:#3a7bff}
+  .btn:active{transform:scale(.98)}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;padding:104px 0 96px;text-align:center}
+  .hero::before{content:"";position:absolute;inset:-20% -10% auto;height:640px;background:radial-gradient(60% 60% at 50% 0%,rgba(33,107,255,.38),transparent 70%);pointer-events:none}
+  .hero .wrap{position:relative}
+  .hero h1{margin:0 auto;max-width:15ch;font-size:clamp(2.6rem,7vw,5rem);line-height:1.04;letter-spacing:-.045em;font-weight:800}
+  .hero p.lede{margin:24px auto 0;max-width:52ch;color:var(--muted);font-size:clamp(1.05rem,2vw,1.25rem)}
+  .hero .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:36px}
+
+  /* editor mock */
+  .mock{margin:72px auto 0;max-width:880px;text-align:left;background:linear-gradient(180deg,var(--raised),var(--surface));border:1px solid var(--line);border-radius:24px;padding:20px 20px 24px;box-shadow:0 40px 120px -40px rgba(33,107,255,.45)}
+  .mock .bar{display:flex;gap:7px;padding:2px 4px 16px}
+  .mock .bar span{width:11px;height:11px;border-radius:50%;background:var(--line)}
+  .tracks{position:relative;display:grid;gap:8px}
+  .track{display:grid;grid-template-columns:84px 1fr;align-items:center;gap:12px;font-size:13px;font-weight:700;color:var(--muted)}
+  .lane{position:relative;height:30px;border-radius:8px;background:rgba(255,255,255,.03)}
+  .lane b{position:absolute;top:4px;bottom:4px;border-radius:6px;background:var(--c);opacity:.9}
+  .playhead{position:absolute;top:-6px;bottom:-6px;left:96px;width:3px;border-radius:2px;background:#52cc3d;box-shadow:0 0 18px #52cc3d;animation:sweep 5s cubic-bezier(.5,0,.2,1) 1 both .6s}
+  @keyframes sweep{from{left:96px}to{left:calc(100% - 4px)}}
+
+  /* sections */
+  section{padding:88px 0;scroll-margin-top:64px}
+  .head{max-width:640px;margin-bottom:48px}
+  h2{margin:0 0 14px;font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.1;letter-spacing:-.035em;font-weight:800}
+  .head p{margin:0;color:var(--muted)}
+
+  /* topic grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+  .tile{display:block;padding:26px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);text-decoration:none;transition:border-color .15s,background .15s}
+  .tile:hover{border-color:var(--accent);background:var(--raised)}
+  .tile h3{margin:14px 0 6px;font-size:1.15rem;letter-spacing:-.02em}
+  .tile p{margin:0;color:var(--muted);font-size:15px;line-height:1.55}
+  .dot{display:block;width:12px;height:12px;border-radius:50%;background:var(--c,var(--accent))}
+
+  /* split rows */
+  .split{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center}
+  .split.flip{grid-template-columns:1.15fr 1fr}.split.flip .copy{order:2}
+  .copy h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
+  .copy p{color:var(--muted);margin:0 0 14px}
+  .video{position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:#000;border:1px solid var(--line)}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .band{background:var(--surface);border-block:1px solid var(--line)}
+
+  /* tabs */
+  .tabs{display:inline-flex;gap:4px;padding:5px;border-radius:999px;background:var(--surface);border:1px solid var(--line);margin-bottom:20px}
+  .tabs button{border:0;background:none;color:var(--muted);font:700 15px var(--font);padding:9px 18px;border-radius:999px;cursor:pointer;transition:color .15s,background .15s}
+  .tabs button:hover{color:var(--text)}
+  .tabs button[aria-selected=true]{background:var(--accent);color:#fff}
+  .panel[hidden]{display:none}
+  .panel .note{color:var(--muted);margin:0 0 16px;max-width:60ch}
+  .drive{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff}
+  .drive iframe{display:block;width:100%;height:420px;border:0}
+  .panel .btn{margin-top:16px}
+
+  /* warm-up */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .stat{padding:28px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line)}
+  .stat strong{display:block;font-size:2.6rem;line-height:1;letter-spacing:-.04em;font-weight:800}
+  .stat span{display:block;margin-top:10px;font-weight:700}
+  .stat p{margin:8px 0 0;color:var(--muted);font-size:15px;line-height:1.55}
+  .prose{max-width:62ch;color:var(--muted);margin:0 0 32px}
+
+  /* titles */
+  .formula{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:28px}
+  .formula div{padding:24px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line)}
+  .formula strong{display:block;margin-bottom:6px;font-size:1.05rem}
+  .formula p{margin:0;color:var(--muted);font-size:15px;line-height:1.55}
+  .examples{display:grid;gap:12px}
+  .ex{padding:18px 22px;border-radius:16px;background:var(--raised);border:1px solid var(--line);font-weight:600}
+  .ex small{color:var(--muted);font-weight:500}
+
+  /* timeline */
+
+  /* timeline (scoped) */
+.tlx{--tbg:#11131b;--panel:#171a24;--lane:#232736;--clip:#2a2e3d;--clip-fg:#eef0f7;--shadow:rgba(0,0,0,.6);--fg:#eef0f7;--mute:#8e94a9;--playhead:#52cc3d;--accent:#216bff;color-scheme:dark;
+--c-caps:#f2b53a;--c-fx:#ff6f93;--c-broll:#6cb4f5;--c-main:#8b92ff;--c-voice:#ff836a;--c-music:#a88af7;--c-sfx:#36d0bd;
+--font:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;--lab:92px;display:flex;flex-direction:column;gap:18px;outline:none;font-size:15px;line-height:1.5;color:var(--fg);font-variant-numeric:tabular-nums
+.tip a{color:var(--fg);text-underline-offset:3px;font-size:12px}
+.stage{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:24px;align-items:start}
+.vid{position:relative;aspect-ratio:9/16;max-height:560px;width:100%;background:#000;border-radius:20px;overflow:hidden;cursor:pointer;border:1px solid var(--lane);box-shadow:0 30px 70px -30px rgba(33,107,255,.45)}
+.vid video{width:100%;height:100%;object-fit:contain;display:block}
+.big{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.28);transition:opacity .15s}
+.big span{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center}
+.vid.playing .big{opacity:0;pointer-events:none}
+.nov{position:absolute;inset:auto 0 0 0;padding:10px 12px;background:rgba(0,0,0,.7);color:#fff;font-size:12px;line-height:1.4}
+.side{display:flex;flex-direction:column;gap:14px;min-width:0}
+.live{min-height:1.15em;font-weight:800;font-size:clamp(26px,4.6vw,42px);letter-spacing:-.04em;text-transform:uppercase;line-height:1.1;color:var(--fg)}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.pp{width:42px;height:42px;flex:none;border:0;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;cursor:pointer}
+.pp:hover{transform:scale(1.06)}
+.tbtn,select{font:700 12px var(--font);color:var(--fg);background:var(--panel);border:1px solid var(--lane);border-radius:99px;padding:7px 12px;cursor:pointer}
+.time{font-weight:800;font-size:13px;min-width:112px}.time i{font-style:normal;color:var(--mute);font-weight:500}
+.status{font-size:12px;color:var(--mute)}.status.bad{color:var(--c-fx)}
+.now{background:var(--panel);border:1px solid var(--lane);border-radius:18px;padding:6px 16px}
+.nrow{display:grid;grid-template-columns:86px 1fr;gap:8px;padding:5px 0;border-top:1px solid var(--lane);font-size:13px;align-items:baseline}
+.nrow:first-child{border-top:0}
+.nrow b{font-size:10.5px;font-weight:800;color:var(--cc)}
+.nrow span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}.nrow span.off{color:var(--mute);font-weight:400}
+details{font-size:12px;color:var(--mute)}summary{cursor:pointer;font-weight:600}
+.src{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.src input[type=text]{flex:1 1 220px;font:500 12px var(--font);padding:7px 12px;border-radius:99px;border:1.5px solid var(--lane);background:var(--panel);color:var(--fg)}
+.scroll{overflow-x:auto;padding:38px 6px 16px 0;margin-right:-6px}
+.tl{position:relative;min-width:940px;cursor:col-resize;user-select:none;touch-action:pan-y}
+.row{display:grid;grid-template-columns:var(--lab) 1fr;height:58px;border-top:2px solid var(--lane)}
+.row:last-of-type{border-bottom:2px solid var(--lane)}.row.ruler{height:24px;border:0}
+.cell{position:sticky;left:0;z-index:6;background:var(--tbg);display:flex;align-items:center;padding-right:8px;font-size:10.5px;font-weight:800;color:var(--cc,var(--mute))}
+.tlane{position:relative}
+.tick{position:absolute;top:12px;bottom:0;border-left:2px solid var(--lane)}
+.tick i{position:absolute;top:-13px;left:4px;font-style:normal;font-size:10px;color:var(--mute)}
+.row[data-key=caps]{--cc:var(--c-caps)}.row[data-key=fx]{--cc:var(--c-fx)}.row[data-key=broll]{--cc:var(--c-broll)}.row[data-key=main]{--cc:var(--c-main)}
+.row[data-key=voice]{--cc:var(--c-voice)}.row[data-key=music]{--cc:var(--c-music)}.row[data-key=sfx],.row[data-key=sfx2],.row[data-key=clipaudio]{--cc:var(--c-sfx)}
+.nrow[data-key=caps]{--cc:var(--c-caps)}.nrow[data-key=fx]{--cc:var(--c-fx)}.nrow[data-key=broll]{--cc:var(--c-broll)}.nrow[data-key=main]{--cc:var(--c-main)}
+.nrow[data-key=voice]{--cc:var(--c-voice)}.nrow[data-key=music]{--cc:var(--c-music)}.nrow[data-key=sfx],.nrow[data-key=sfx2],.nrow[data-key=clipaudio]{--cc:var(--c-sfx)}
+.clip{position:absolute;top:8px;height:42px;border:0;border-radius:9px;padding:0;background:linear-gradient(180deg,color-mix(in srgb,var(--cc) 34%,var(--clip)),var(--clip) 80%);color:var(--clip-fg);text-align:left;overflow:hidden;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 12px -8px var(--shadow);transition:transform .15s,box-shadow .15s,filter .15s}
+.clip:hover{filter:brightness(1.14)}
+.clip.on{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 0 0 1.5px var(--cc),0 10px 18px -8px color-mix(in srgb,var(--cc) 65%,transparent)}
+.clip.sel::after{content:"";position:absolute;left:8px;right:8px;bottom:3px;height:2px;border-radius:2px;background:var(--cc)}
+.clip:focus-visible{outline:2px solid var(--playhead);outline-offset:2px}
+.clip.cap{top:15px;height:28px;border-radius:3px;box-shadow:none}.clip.cap.on{transform:none;filter:brightness(1.5);box-shadow:0 0 0 1px var(--cc)}
+.clip.top{top:6px;height:21px;border-radius:6px}.clip.bot{top:29px;height:21px;border-radius:6px}
+.lbl{position:absolute;left:8px;top:5px;right:4px;font-weight:900;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.clip.top .lbl,.clip.bot .lbl{top:2px}
+.wave{position:absolute;left:0;right:0;top:21px;bottom:5px;display:flex;align-items:center;justify-content:flex-end;gap:3px;padding-right:8px}
+.wave u{width:3px;flex:none;border-radius:2px;background:color-mix(in srgb,var(--cc) 45%,#fff);opacity:.85}
+.tplayhead{position:absolute;top:12px;bottom:-6px;width:4px;margin-left:-2px;z-index:5;pointer-events:none;left:calc(var(--lab) + (100% - var(--lab)) * var(--p,0));background:var(--playhead);border-radius:2px;box-shadow:0 0 14px color-mix(in srgb,var(--playhead) 55%,transparent)}
+.pill{position:absolute;top:-26px;left:50%;transform:translateX(-50%);padding:2px 8px;border-radius:99px;background:var(--playhead);color:#fff;font-size:11px;font-weight:600;white-space:nowrap}
+.tip{min-height:3.2em;max-width:70ch;padding-left:14px;border-left:4px solid var(--cc,var(--lane))}
+.tip b{font-weight:900;font-size:14px;text-transform:uppercase}.tip span{color:var(--mute);font-size:12px;margin-left:8px}
+.tip .file{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:4px 0 6px}
+.tip code{font:800 15px var(--font);color:var(--cc,var(--fg));overflow-wrap:anywhere}.tip em{font-style:normal;font-size:12px;color:var(--mute)}
+.hint{font-size:12px;color:var(--mute)}
+@media(max-width:760px){.stage{grid-template-columns:1fr}.vid{max-width:320px;margin:0 auto}}
+@media(prefers-reduced-motion:reduce){.clip{transition:none}}
+}
+
+  /* closing */
+  .closing{text-align:center}
+  .closing .box{padding:72px 24px;border-radius:32px;border:1px solid var(--line);background:radial-gradient(70% 120% at 50% 0%,rgba(33,107,255,.28),transparent 70%),var(--surface)}
+  .closing h2{max-width:18ch;margin-inline:auto}
+  .closing p{color:var(--muted);max-width:46ch;margin:0 auto 28px}
+  footer{padding:36px 0 56px;color:var(--muted);font-size:15px}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:28px}
+  footer a{text-decoration:none}footer a:hover{color:var(--text)}
+
+  @media(max-width:860px){
+    .split,.split.flip{grid-template-columns:1fr;gap:28px}.split.flip .copy{order:0}
+    section{padding:64px 0}.hero{padding:72px 0 64px}
+      .track{grid-template-columns:64px 1fr}.playhead{left:76px}
+    @keyframes sweep{from{left:76px}to{left:calc(100% - 4px)}}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><i>▶</i>Content Creation 4 Beginners</a>
+    <nav class="links" aria-label="Sections">
+      <a href="#guide">Guide</a>
+      <a href="#assets">Assets</a>
+      <a href="#warmup">Warm-up</a>
+      <a href="#titles">Titles</a>
+      <a href="#timeline">Example edit</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <h1>Make short videos people finish watching.</h1>
+      <p class="lede">A free, practical guide to voice, captions, music, sound effects and titles, with the files and a real edit to learn from.</p>
+      <div class="cta">
+        <a class="btn primary" href="#assets">Get the assets</a>
+        <a class="btn" href="#timeline">See an example edit</a>
+      </div>
+
+      <div class="mock" aria-hidden="true">
+        <div class="bar"><span></span><span></span><span></span></div>
+        <div class="tracks">
+          <div class="track">Captions<div class="lane" style="--c:var(--c-caps)"><b style="left:2%;width:9%"></b><b style="left:13%;width:6%"></b><b style="left:21%;width:11%"></b><b style="left:34%;width:7%"></b><b style="left:43%;width:12%"></b><b style="left:57%;width:8%"></b><b style="left:67%;width:10%"></b><b style="left:79%;width:7%"></b><b style="left:88%;width:10%"></b></div></div>
+          <div class="track">B-roll<div class="lane" style="--c:var(--c-broll)"><b style="left:0;width:14%"></b><b style="left:15%;width:22%"></b><b style="left:39%;width:12%"></b><b style="left:53%;width:19%"></b><b style="left:74%;width:24%"></b></div></div>
+          <div class="track">Voice<div class="lane" style="--c:var(--c-voice)"><b style="left:0;width:30%"></b><b style="left:32%;width:26%"></b><b style="left:60%;width:38%"></b></div></div>
+          <div class="track">Music<div class="lane" style="--c:var(--c-music)"><b style="left:0;width:100%"></b></div></div>
+          <div class="track">Effects<div class="lane" style="--c:var(--c-sfx)"><b style="left:8%;width:3%"></b><b style="left:26%;width:3%"></b><b style="left:41%;width:5%"></b><b style="left:58%;width:3%"></b><b style="left:73%;width:4%"></b><b style="left:90%;width:3%"></b></div></div>
+          <div class="playhead"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="guide" class="band">
+    <div class="wrap">
+      <div class="head">
+        <h2>What's in the guide</h2>
+        <p>Seven things that decide whether a short video gets watched. Pick one to jump to it.</p>
+      </div>
+      <div class="grid">
+        <a class="tile" href="#voice" style="--c:var(--c-voice)"><span class="dot"></span><h3>The voice</h3><p>Why a good voice can carry a video and a bad one can sink it.</p></a>
+        <a class="tile" href="#aspect"><span class="dot"></span><h3>Aspect ratio</h3><p>Set up vertical video properly before you edit.</p></a>
+        <a class="tile" href="#pro"><span class="dot"></span><h3>CapCut on PC</h3><p>A screen-recording workflow for pro-quality results.</p></a>
+        <a class="tile" href="#captions" style="--c:var(--c-caps)"><span class="dot"></span><h3>Captions</h3><p>Where to place them so they help instead of getting in the way.</p></a>
+        <a class="tile" href="#assets" style="--c:var(--c-music)"><span class="dot"></span><h3>Music and sound effects</h3><p>What to pick, plus folders you can download from.</p></a>
+        <a class="tile" href="#warmup"><span class="dot"></span><h3>Warming up an account</h3><p>How many days each platform needs before you post.</p></a>
+        <a class="tile" href="#titles" style="--c:var(--c-sfx)"><span class="dot"></span><h3>Video titles</h3><p>A simple formula that keeps your uploads findable.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="voice">
+    <div class="wrap split">
+      <div class="copy">
+        <h2>The voice</h2>
+        <p>The voice is incredibly important. A bad voice can kill a video, but a good voice can blow it up.</p>
+        <p>Watch the video to hear the difference.</p>
+      </div>
+      <div class="video"><iframe referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/n3S3GU6RsBw" title="The voice" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+    </div>
+  </section>
+
+  <section id="aspect" class="band">
+    <div class="wrap split flip">
+      <div class="copy">
+        <h2>Aspect ratio</h2>
+        <p>If you're posting short-form vertical videos, you need to change your aspect ratio before you start editing.</p>
+      </div>
+      <div class="video"><iframe referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/WCV3pzyYsjk" title="Aspect ratio" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+    </div>
+  </section>
+
+  <section id="pro">
+    <div class="wrap split">
+      <div class="copy">
+        <h2>Pro-quality results in CapCut on PC</h2>
+        <p>A screen-recording workflow for CapCut on PC. Watch the walkthrough.</p>
+      </div>
+      <div class="video"><iframe referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/CpEQpUztwvA" title="CapCut on PC walkthrough" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+    </div>
+  </section>
+
+  <section id="captions" class="band">
+    <div class="wrap split flip">
+      <div class="copy">
+        <h2>Captions</h2>
+        <p>The position of your captions depends on the video. Keep them clear of the action and easy to read.</p>
+      </div>
+      <div class="video"><iframe referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/GwnahpuELUU" title="Captions" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+    </div>
+  </section>
+
+  <section id="assets">
+    <div class="wrap">
+      <div class="head">
+        <h2>Assets, music and sound effects</h2>
+        <p>For most videos, especially short ones, pick an upbeat song. Nintendo songs, especially from Mario games, work really well. Browse the folders below or open them in Drive.</p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Asset folders">
+        <button role="tab" id="t-assets" aria-selected="true" aria-controls="p-assets">Assets</button>
+        <button role="tab" id="t-music" aria-selected="false" aria-controls="p-music" tabindex="-1">Music</button>
+        <button role="tab" id="t-sfx" aria-selected="false" aria-controls="p-sfx" tabindex="-1">Sound effects</button>
+      </div>
+
+      <div class="panel" id="p-assets" role="tabpanel" aria-labelledby="t-assets">
+        <p class="note">Files used throughout this guide.</p>
+        <div class="drive"><iframe src="https://drive.google.com/embeddedfolderview?id=1UWRIP1RsrQP1stHOqwUQhjOHAca4mvMN#grid" title="Assets folder" loading="lazy"></iframe></div>
+        <a class="btn" href="https://drive.google.com/drive/folders/1UWRIP1RsrQP1stHOqwUQhjOHAca4mvMN?usp=sharing" target="_blank" rel="noopener">Open in Drive</a>
+      </div>
+      <div class="panel" id="p-music" role="tabpanel" aria-labelledby="t-music" hidden>
+        <p class="note">Upbeat tracks to put under your voice. Keep the music quieter than the voice.</p>
+        <div class="drive"><iframe data-src="https://drive.google.com/embeddedfolderview?id=1SkH-LYUauIwtBaEUJFR8gFZXOYv4xGa8#list" title="Music folder"></iframe></div>
+        <a class="btn" href="https://drive.google.com/drive/folders/1SkH-LYUauIwtBaEUJFR8gFZXOYv4xGa8?usp=share_link" target="_blank" rel="noopener">Open in Drive</a>
+      </div>
+      <div class="panel" id="p-sfx" role="tabpanel" aria-labelledby="t-sfx" hidden>
+        <p class="note">Pops, risers, booms and more to drop into your edits.</p>
+        <div class="drive"><iframe data-src="https://drive.google.com/embeddedfolderview?id=1MUydGbaIVh78rbdX4pjXNhyzZQwRz1Ff#list" title="Sound effects folder"></iframe></div>
+        <a class="btn" href="https://drive.google.com/drive/folders/1MUydGbaIVh78rbdX4pjXNhyzZQwRz1Ff?usp=share_link" target="_blank" rel="noopener">Open in Drive</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="warmup" class="band">
+    <div class="wrap">
+      <div class="head">
+        <h2>Warming up your account</h2>
+        <p>Warming up means using a new account like anyone else would: watch videos, scroll, like, comment, subscribe and follow channels.</p>
+      </div>
+      <p class="prose">There's no magic number, and it's different on every platform. The best advice is to use an old account, even one with previous uploads. You can always make those private. These are rough starting points.</p>
+      <div class="stats">
+        <div class="stat"><strong>4 days</strong><span>YouTube</span><p>The quickest of the three to get going.</p></div>
+        <div class="stat"><strong>7 days</strong><span>TikTok</span><p>A full week of normal scrolling and liking.</p></div>
+        <div class="stat"><strong>Weeks</strong><span>Instagram</span><p>Some accounts take less, but Instagram is very strict.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="titles">
+    <div class="wrap">
+      <div class="head">
+        <h2>What to title your videos</h2>
+        <p>It depends on your niche, but keep titles consistent with your other uploads. Vague ones like "I can't believe this happened" or "This is crazy" look unprofessional and make your video harder to find in search.</p>
+      </div>
+      <div class="formula">
+        <div><strong>Say what's happening</strong><p>A plain explanation of the video.</p></div>
+        <div><strong>Say how to feel</strong><p>What the viewer should feel about it.</p></div>
+        <div><strong>Add a formatter</strong><p>Optional, like a date or "Part 2".</p></div>
+      </div>
+      <div class="examples">
+        <div class="ex">This Might Be The End Of Roblox Because Of (topic) 😔… | September 7 2026 <small>(date is optional)</small></div>
+        <div class="ex">Why Did (person) Do (action) To (other person)? 😳… | Part 2 <small>(part number is optional)</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline" class="band">
+    <div class="wrap">
+      <div class="head">
+        <h2>See a real edit, layer by layer</h2>
+        <p>Press play, drag the timeline, and click any clip to see what it is and why it's there.</p>
+      </div>
+      <div class="tlx" id="tlx" tabindex="0" aria-label="Example timeline">
+<div class="stage">
+    <div class="vid" id="vid">
+      <video id="v" playsinline preload="metadata" loop></video>
+      <div class="big"><span><svg width="22" height="22" viewBox="0 0 14 14"><path d="M3 1.5v11l9-5.5z" fill="#111"/></svg></span></div>
+      <div class="nov" id="nov" hidden></div>
+    </div>
+    <div class="side">
+      <div class="live" id="live" aria-live="off"></div>
+      <div class="controls">
+        <button class="pp" id="pp" type="button" aria-label="Play"></button>
+        <div class="time" id="time">00:00.0 <i>/ 00:20.7</i></div>
+        <select id="rate" aria-label="Speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option></select>
+        <button class="tbtn" id="mute" type="button">Sound on</button>
+      </div>
+      <div class="status" id="status">Loading video…</div>
+      <div class="now" id="now" aria-label="What is playing right now"></div>
+      <details>
+        <summary>Video link expired? Use a different video</summary>
+        <div class="src">
+          <input type="text" id="url" placeholder="Paste a video link (.mp4)">
+          <button class="tbtn" id="go" type="button">Load link</button>
+          <label class="tbtn">Pick a file<input type="file" id="file" accept="video/*" hidden></label>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="scroll"><div class="tl" id="tl"></div></div>
+  <div class="hint" id="hint">Space = play/pause · drag the timeline to scrub · ← → step a frame (hold Shift for 1s) · click any clip</div>
+  <div class="tip" id="tip"></div>
+</div>
+    </section>
+
+  <section class="closing">
+    <div class="wrap">
+      <div class="box">
+        <h2>Ready to make your first one?</h2>
+        <p>Grab the files, pick an upbeat track and start cutting.</p>
+        <a class="btn primary" href="#assets">Get the assets</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Content Creation 4 Beginners</span>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var DUR = 20.7, LAB = 92, LANEW = 940 - LAB;
+  var VID_URL = "3-Roblox%20Is%20Actually%20HEALING%E2%80%A6%20This%20CG5%20Concert%20Is%20Insane%F0%9F%98%B3.mp4";
+  var VID_FALLBACK = "https://pub-786f3caa6e0c467d81af67b260388ae9.r2.dev/3-Roblox%20Is%20Actually%20HEALING%E2%80%A6%20This%20CG5%20Concert%20Is%20Insane%F0%9F%98%B3.mp4";
+  var triedFallback = false;
+
+  /* Real data from the DaVinci Resolve export. Seconds from timeline start. */
+  var CAP_STARTS = [0,0.27,0.65,0.95,1.27,1.35,1.58,1.85,1.90,2.10,2.23,2.52,2.90,3.12,3.17,3.32,3.77,4.15,4.37,4.47,4.73,4.92,5.10,5.27,5.60,5.78,5.85,6.08,6.45,6.58,6.73,6.92,7.10,7.28,7.55,7.77,7.95,8.02,8.25,8.42,8.57,8.75,8.93,9.20,9.57,9.65,9.90,10.08,10.27,10.45,10.65,10.95,11.07,11.33,11.60,12.05,12.30,12.48,12.53,12.68,12.95,13.20,13.38,13.98,14.22,14.40,14.55,14.85,15.30,15.35,15.50,15.65,15.95,16.07,16.35,16.80,16.98,17.23,17.28,17.48,17.70,17.93,18.12,18.53,18.87,19.07,19.25,19.30,19.43,19.48,19.53,19.73,19.95,20.22,20.55];
+  var SUBS = [[0.03,"Roblox is"],[0.65,"actually"],[0.95,"healing."],[1.27,"People are"],[1.58,"literally"],[1.85,"going to"],[2.10,"concerts in"],[2.52,"Roblox"],[2.90,"now,"],[3.12,"and it’s"],[3.32,"genuinely"],[3.77,"insane,"],[4.15,"because"],[4.37,"everyone has"],[4.73,"been"],[4.92,"asking"],[5.10,"Roblox for"],[5.60,"new"],[5.78,"events in"],[6.08,"concerts"],[6.45,"like"],[6.58,"the"],[6.73,"old"],[6.92,"days."],[7.10,"But"],[7.28,"Roblox"],[7.55,"didn’t"],[7.77,"even"],[7.95,"care and"],[8.25,"said"],[8.42,"they’re"],[8.57,"too"],[8.75,"busy"],[8.93,"promoting"],[9.20,"Brainrock"],[9.57,"games to"],[9.90,"make"],[10.08,"them."],[10.27,"But"],[10.45,"Speed"],[10.65,"Keyboard"],[10.95,"Escape is"],[11.33,"saving"],[11.60,"Roblox"],[12.05,"because"],[12.30,"they’re"],[12.48,"doing a"],[12.68,"music"],[12.95,"event"],[13.20,"with"],[13.38,"CG5"],[13.98,"until"],[14.22,"the"],[14.40,"31st of"],[14.85,"October,"],[15.30,"and the"],[15.50,"graphics are"],[15.95,"actually “mogging”"],[16.35,"every"],[16.80,"other"],[16.98,"game,"],[17.23,"and it’s"],[17.48,"way"],[17.70,"better"],[17.93,"than"],[18.12,"GTA"],[18.53,"6,"],[18.87,"so"],[19.07,"you"],[19.25,"should go"],[19.43,"see it in"],[19.73,"Plus"],[19.95,"One"],[20.22,"Keyboard"],[20.55,"Escape."]];
+
+  var caps = CAP_STARTS.map(function (s, i) {
+    var e = i + 1 < CAP_STARTS.length ? CAP_STARTS[i + 1] : DUR, txt = "";
+    SUBS.forEach(function (u) { if (u[0] >= s - 0.015 && u[0] < e) txt = u[1]; });
+    return [s, e, "", txt];
+  });
+  var broll = [[0,1.0,"roblox"],[1.0,1.52,"clip"],[1.52,2.19,"clip"],[2.18,3.73,"clip"],[3.73,4.4,"gem alert"],[4.72,5.64,"wallahi"],[5.63,6.21,"the hunt"],[6.22,6.54,""],[6.53,7.76,"old roblox"],[7.77,9.02,"ishowspeed"],[9.02,10.09,"homepage"],[10.32,12.09,"flamingo"],[12.35,13.27,"clip"],[13.27,14.27,"cg5"],[14.27,15.47,"clip"],[16.05,16.95,"gangster"],[16.95,18.3,"clip"],[18.3,18.77,"who?"],[18.77,19.55,"clip"],[19.72,20.7,"game logo"]];
+  var BFILES = ["roblox.png","3.mp4","4.mp4","1.mp4","gem_alert.mp4","say-wallahi.mp4","the-hunt.tiff","concert.tiff","It’s Not Nostalgia. Old Roblox WAS Better. [tVfxWyeqezw].png","Ishowspeed VHS crashout [IqXzSMARCHs].mp4","roblox-homepage.mp4","flamingo.mp4","2.mp4","cg5.tiff","2.mp4","roblox2-gangster-funny.png","3.mp4","whoisthis.png","2.mp4","game-logo.png"];
+  broll.forEach(function (c, i) { c[4] = BFILES[i]; });
+  function fr(list) { return list.map(function (a) { return [a[0], a[0] + a[1] / 60, a[2], undefined, a[3]]; }); }
+  var voice = [[0,73],[1.22,348],[7.02,189],[10.17,303],[15.22,118],[17.18,101],[18.87,110]].map(function (a, i) { return [a[0], a[0] + a[1] / 60, "voice", undefined, i === 0 ? "1.mp3" : "2.mp3"]; });
+  var PILL = "ui_price_pill_pop.wav";
+  var sfx = fr([[0,14,"pop","pop.mp3"],[0.23,46,"riser","riser-1.wav"],[1.0,30,"snap","snap.mp3"],[1.5,12,"pop",PILL],[2.15,12,"pop",PILL],[2.98,46,"riser","riser-1.wav"],[3.75,90,"boom","vine_boom.mp3"],[5.63,12,"pop",PILL],[6.22,12,"pop",PILL],[6.53,12,"pop",PILL],[7.2,34,"riser","ui_riser1.wav"],[7.77,75,"boom","vine_boom.mp3"],[9.02,12,"pop",PILL],[10.32,12,"pop",PILL],[10.58,46,"riser","riser-1.wav"],[11.35,60,"buy","buy_1.mp3"],[12.35,12,"pop",PILL],[13.27,47,"bass","bass.wav"],[14.27,12,"pop",PILL],[16.05,54,"rizz","rizz.mp3"],[16.95,12,"pop",PILL],[18.3,90,"boom","vine_boom.mp3"]]);
+  var sfx2 = fr([[4.7,12,"swoosh","swoosh.wav"],[6.77,108,"low honor","rd2_low_honor.mp3"],[19.72,41,"bass","bass.wav"]]);
+
+  var DRIVE = {
+    "pop.mp3": ["15Xwx0_gj5_xL5GWJYBGOm9h92pnf0cBl", "transitions_impacts"],
+    "snap.mp3": ["1YnsFXvPeTPMXjISEf4FyLtaik0tWKjTI", "transitions_impacts"],
+    "riser-1.wav": ["1TIfgL1HT--V6CI0L9K8yW1v3TgtVsAOC", "riser"],
+    "ui_riser1.wav": ["1syvtcDX8kXVMZ4Kh6ckM-AVN45jp1x7t", "riser"],
+    "ui_price_pill_pop.wav": ["1oa-0bc2y_4mNoXIxoqBzEhprFH3IdPHC", "premium_ui / sound_effects_clip5"],
+    "vine_boom.mp3": ["19reX0HhuDH51qZ-Qkja-2GcvHi2LWg1f", "reactions_voices"],
+    "buy_1.mp3": ["1O40sTHPouTCeOePcK4u9gV3krQDLqIyz", "ui_tech"],
+    "bass.wav": ["1zefxPdUNMAZ5nRxbXrlR9Kc2lQq_jb0l", "retro-roblox"],
+    "rizz.mp3": ["1GB9RMusFRtum6aLbKvn1f21hvBri-VwB", "memes_funny"],
+    "swoosh.wav": ["1eH3A8P8K2xR4zp_UZg0-xNTQUqxKxop4", "retro-roblox"],
+    "rd2_low_honor.mp3": ["1fwB-y-GBj_61rg9aNetxDwm1LnwYQF8V", "gaming"]
+  };
+
+  var ROWS = [
+    { key: "caps", name: "CAPTIONS", clips: caps, cap: true },
+    { key: "fx", name: "EFFECTS", clips: [[11.35, 11.85, "flash", "bot", "green-flash"], [16.05, 16.55, "flash", "bot", "purple-flash"], [11.35, 11.6, "shake", "top", "impact shake short"]] },
+    { key: "broll", name: "B-ROLL", clips: broll },
+    { key: "main", name: "FOOTAGE", clips: [[0, 20.53, "main footage", undefined, "3-tome.mp4"], [20.53, 20.7, "", undefined, "3-tome.mp4"]] },
+    { key: "voice", name: "VOICE", clips: voice, wave: true, seed: 3 },
+    { key: "music", name: "MUSIC", clips: [[0, 20.7, "music", undefined, "war.mp3"]], wave: true, music: true },
+    { key: "sfx", name: "SFX", clips: sfx, wave: true, seed: 5 },
+    { key: "sfx2", name: "SFX 2", clips: sfx2, wave: true, seed: 9 },
+    { key: "clipaudio", name: "CLIP AUDIO", clips: [[4.72, 6.22, "wallahi", undefined, "say-wallahi.mp4 (audio)"]], wave: true, seed: 13 }
+  ];
+  var TIPS = {
+    caps: "One caption block for every 2 or 3 words, and each one appears as the words are spoken. That is 95 blocks in 20 seconds. Watch the big text change as the playhead moves.",
+    fx: "The flash, the shake and the buy sound all land on the same frame at 11.4 seconds. Stack effects like that for your biggest moment.",
+    broll: "A new image or clip about every second keeps people watching. This edit swaps the b-roll 20 times in under 21 seconds.",
+    main: "The main footage runs the whole video underneath. The b-roll covers it to show each point.",
+    voice: "The voice carries the video. A bad voice can kill it, and a good one can blow it up. Here the voiceover is cut into 7 pieces so the pauses are gone.",
+    music: "One music track runs under everything. Use an upbeat song for most videos, especially short form, and keep it quieter than the voice.",
+    sfx: "A pop on most image changes, risers before big moments and a boom on the biggest ones. That is 22 small sounds doing a lot of work.",
+    sfx2: "More effects get their own row so nothing overlaps: a swoosh, a low hit and a bass drop for the ending.",
+    clipaudio: "The meme clip brings its own audio. Giving it a separate track lets you change its volume without touching the rest."
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var tl = $("tl"), tip = $("tip"), live = $("live"), pp = $("pp"), v = $("v"), vidBox = $("vid"), statusEl = $("status"), nov = $("nov");
+  var t = 0, playing = false, last = 0, dragging = false, moved = false, vidOK = false, rate = 1, all = [], selEl = null, lastSub = -1, nowRows = [];
+
+  function rnd(n) { var x = Math.sin(n * 127.1) * 43758.5453; return x - Math.floor(x); }
+  function mk(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function fmt(x) { var s = Math.floor(x), d = Math.floor((x - s) * 10); return "00:" + (s < 10 ? "0" : "") + s + "." + d; }
+
+  /* ruler */
+  var rr = mk("div", "row ruler"); rr.appendChild(mk("div", "cell")); var rl = mk("div", "tlane"); rr.appendChild(rl);
+  for (var s = 0; s <= 20; s++) {
+    var tk = mk("div", "tick"); tk.style.left = (s / DUR * 100) + "%";
+    if (s % 2 === 0) tk.appendChild(mk("i", "", s + "s"));
+    rl.appendChild(tk);
+  }
+  tl.appendChild(rr);
+
+  /* lanes + "now playing" rows */
+  var nowBox = $("now");
+  ROWS.forEach(function (r) {
+    var nr = mk("div", "nrow"); nr.dataset.key = r.key;
+    var nv = mk("span", "off", "—"); nr.appendChild(mk("b", "", r.name)); nr.appendChild(nv); nowBox.appendChild(nr);
+    nowRows.push({ r: r, el: nv, prev: "" });
+
+    var row = mk("div", "row"); row.dataset.key = r.key;
+    row.appendChild(mk("div", "cell", r.name));
+    var lane = mk("div", "tlane"); row.appendChild(lane);
+    r.clips.forEach(function (c, ci) {
+      var wpx = (c[1] - c[0]) / DUR * LANEW;
+      var b = mk("button", "clip" + (r.cap ? " cap" : "") + (c[3] === "top" ? " top" : "") + (c[3] === "bot" ? " bot" : ""));
+      b.type = "button";
+      b.style.left = (c[0] / DUR * 100) + "%";
+      b.style.width = "max(3px, calc(" + ((c[1] - c[0]) / DUR * 100) + "% - 1px))";
+      var name = r.cap ? (c[3] || "…") : (c[2] || r.name.toLowerCase());
+      b.title = name; b.setAttribute("aria-label", r.name.toLowerCase() + ": " + name);
+      if (!r.cap && c[2] && wpx >= 46) b.appendChild(mk("span", "lbl", r.music || r.key === "main" ? r.name : c[2].toUpperCase()));
+      if (r.wave && wpx > 58 && !c[3]) {
+        var w = mk("span", "wave"), n = r.music ? 110 : Math.max(3, Math.min(60, Math.floor((wpx - 20) / 6)));
+        for (var k = 0; k < n; k++) {
+          var h = r.music ? 5 + Math.abs(Math.sin(k * 0.7)) * 12 : 5 + rnd(k + ci * 31 + (r.seed || 0)) * 14;
+          var u = mk("u"); u.style.height = h + "px"; w.appendChild(u);
+        }
+        b.appendChild(w);
+      }
+      b.dataset.range = c[0].toFixed(1) + "s to " + c[1].toFixed(1) + "s";
+      b._c = c;
+      b.addEventListener("click", function (e) { e.stopPropagation(); select(r, b); seekTo(c[0]); b.blur(); });
+      lane.appendChild(b);
+      all.push({ el: b, t0: c[0], t1: c[1] });
+    });
+    tl.appendChild(row);
+  });
+  var ph = mk("div", "tplayhead"), pill = mk("div", "pill", "00:00.0"); ph.appendChild(pill); tl.appendChild(ph);
+
+  function select(r, el) {
+    if (selEl) selEl.classList.remove("sel");
+    selEl = el; el.classList.add("sel");
+    tip.style.setProperty("--cc", "var(--c-" + (r.key === "sfx2" || r.key === "clipaudio" ? "sfx" : r.key) + ")");
+    tip.innerHTML = "";
+    tip.appendChild(mk("b", "", r.name)); tip.appendChild(mk("span", "", el.dataset.range));
+    var file = el._c && el._c[4];
+    if (file) {
+      var fl = mk("div", "file"); fl.appendChild(mk("code", "", file));
+      var d = DRIVE[file];
+      if (d) {
+        fl.appendChild(mk("em", "", d[1]));
+        var a = mk("a", "", "open in Drive ↗"); a.href = "https://drive.google.com/file/d/" + d[0] + "/view"; a.target = "_blank"; a.rel = "noopener";
+        fl.appendChild(a);
+      }
+      tip.appendChild(fl);
+    }
+    tip.appendChild(mk("div", "txt", TIPS[r.key]));
+  }
+
+  function paint() {
+    tl.style.setProperty("--p", (t / DUR).toFixed(4));
+    pill.textContent = fmt(t);
+    $("time").firstChild.nodeValue = fmt(t) + " ";
+    all.forEach(function (c) { c.el.classList.toggle("on", t >= c.t0 && t < c.t1); });
+    var si = 0; for (var i = 0; i < SUBS.length; i++) if (SUBS[i][0] <= t + 0.02) si = i;
+    if (si !== lastSub) { lastSub = si; live.textContent = SUBS[si][1]; }
+    nowRows.forEach(function (nr) {
+      var items = [];
+      nr.r.clips.forEach(function (c) {
+        if (t >= c[0] && t < c[1]) {
+          var lab = nr.r.cap ? c[3] : c[2], f = (!nr.r.cap && c[4]) ? c[4] : "";
+          items.push(lab && f && lab !== f ? lab + " · " + f : (lab || f));
+        }
+      });
+      var txt = items.join("  +  ");
+      if (txt !== nr.prev) { nr.prev = txt; nr.el.textContent = txt || "—"; nr.el.className = txt ? "" : "off"; }
+    });
+  }
+
+  /* ---- sync: the video is the master clock when it is loaded ---- */
+  function seekTo(x) {
+    t = Math.max(0, Math.min(DUR - 0.01, x));
+    if (vidOK) { try { v.currentTime = t; } catch (e) {} }
+    paint();
+  }
+  function setIcon() {
+    pp.innerHTML = playing
+      ? '<svg width="14" height="14" viewBox="0 0 14 14"><rect x="2.5" y="2" width="3" height="10" rx="1" fill="currentColor"/><rect x="8.5" y="2" width="3" height="10" rx="1" fill="currentColor"/></svg>'
+      : '<svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg>';
+    pp.setAttribute("aria-label", playing ? "Pause" : "Play");
+    vidBox.classList.toggle("playing", playing);
+  }
+  function setPlaying(on) {
+    playing = on; setIcon();
+    if (!vidOK) return;
+    if (on) { var p = v.play(); if (p && p.catch) p.catch(function () { playing = false; setIcon(); }); }
+    else v.pause();
+  }
+  function setStatus(msg, bad) { statusEl.textContent = msg; statusEl.className = "status" + (bad ? " bad" : ""); }
+  function loadVideo(src) {
+    vidOK = false; setStatus("Loading video…"); nov.hidden = true;
+    v.src = src; v.load();
+  }
+  v.addEventListener("loadedmetadata", function () {
+    vidOK = true; v.playbackRate = rate; v.currentTime = t;
+    setStatus("Video synced to the timeline" + (Math.abs(v.duration - DUR) > 0.6 ? " (video is " + v.duration.toFixed(1) + "s, timeline is 20.7s)" : "") + ".");
+    if (playing) setPlaying(true);
+  });
+  v.addEventListener("error", function () {
+    if (!triedFallback && VID_FALLBACK && v.getAttribute("src") === VID_URL) { triedFallback = true; loadVideo(VID_FALLBACK); return; }
+    vidOK = false;
+    setStatus("The video couldn’t load, so the timeline is running on its own.", true);
+    nov.hidden = false; nov.textContent = "Video unavailable. Open “Use a different video” below to paste a new link or pick a file.";
+  });
+  v.addEventListener("play", function () { if (vidOK && !playing) { playing = true; setIcon(); } });
+  v.addEventListener("pause", function () { if (vidOK && playing && !v.seeking) { playing = false; setIcon(); } });
+
+  function loop(now) {
+    var dt = Math.min(0.1, (now - last) / 1000); last = now;
+    if (!dragging) {
+      if (vidOK) { if (playing || !v.paused) t = Math.min(DUR - 0.01, v.currentTime); }
+      else if (playing) { t += dt * rate; if (t >= DUR) t = 0; }
+      if (playing || vidOK) paint();
+    }
+    requestAnimationFrame(loop);
+  }
+
+  /* scrubbing */
+  function seek(e) {
+    var r = tl.getBoundingClientRect(), x = (e.clientX - r.left - LAB) / (r.width - LAB);
+    seekTo(x * DUR);
+  }
+  tl.addEventListener("pointerdown", function (e) {
+    if (e.target.closest && e.target.closest(".clip")) return;
+    if (e.clientX - tl.getBoundingClientRect().left < LAB) return;
+    dragging = true; moved = false;
+    try { tl.setPointerCapture(e.pointerId); } catch (x) {}
+    seek(e);
+  });
+  tl.addEventListener("pointermove", function (e) { if (dragging) { moved = true; seek(e); } });
+  tl.addEventListener("pointerup", function () { if (dragging && !moved) setPlaying(!playing); dragging = false; });
+  tl.addEventListener("pointercancel", function () { dragging = false; });
+
+  /* controls */
+  pp.addEventListener("click", function () { setPlaying(!playing); });
+  vidBox.addEventListener("click", function () { setPlaying(!playing); });
+  $("rate").addEventListener("change", function (e) { rate = parseFloat(e.target.value); v.playbackRate = rate; });
+  $("mute").addEventListener("click", function (e) { v.muted = !v.muted; e.target.textContent = v.muted ? "Sound off" : "Sound on"; });
+  $("go").addEventListener("click", function () { var u = $("url").value.trim(); if (u) loadVideo(u); });
+  $("file").addEventListener("change", function (e) { var f = e.target.files[0]; if (f) loadVideo(URL.createObjectURL(f)); });
+  $("tlx").addEventListener("keydown", function (e) {
+    var tg = e.target, typing = tg && (tg.tagName === "INPUT" || tg.tagName === "SELECT");
+    if (typing) return;
+    if ((e.key === " " || e.code === "Space") && !(tg.closest && tg.closest("button, a"))) { e.preventDefault(); setPlaying(!playing); }
+    else if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      e.preventDefault(); setPlaying(false);
+      seekTo(t + (e.key === "ArrowRight" ? 1 : -1) * (e.shiftKey ? 1 : 1 / 60));
+    }
+  });
+
+  setIcon();
+  var first = all.filter(function (c) { return c.el.getAttribute("aria-label") === "effects: shake"; })[0].el;
+  select(ROWS[1], first); paint();
+  var tlx = $("tlx");
+  tlx.addEventListener("pointerdown", function (e) {
+    if (!(e.target.closest && e.target.closest("input,select,button,a,label"))) { try { tlx.focus({ preventScroll: true }); } catch (x) {} }
+  });
+  var started = false;
+  function startVideo() { if (!started) { started = true; loadVideo(VID_URL); } }
+  setStatus("Video loads when you scroll here.");
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (en, ob) { if (en[0].isIntersecting) { startVideo(); ob.disconnect(); } }, { rootMargin: "400px" }).observe(tlx);
+  } else { startVideo(); }
+  requestAnimationFrame(function (n) { last = n; loop(n); });
+})();
+</script>
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  function show(t){
+    tabs.forEach(function(b){
+      var on=b===t;
+      b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1;
+      var p=document.getElementById(b.getAttribute('aria-controls'));
+      p.hidden=!on;
+      if(on){var f=p.querySelector('iframe[data-src]');if(f){f.src=f.dataset.src;f.removeAttribute('data-src');}}
+    });
+  }
+  tabs.forEach(function(b,i){
+    b.addEventListener('click',function(){show(b);});
+    b.addEventListener('keydown',function(e){
+      var n=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+      if(n){var t=tabs[(i+n+tabs.length)%tabs.length];show(t);t.focus();}
+    });
+  });
+})();
+</script>
+</body>
+</html>
